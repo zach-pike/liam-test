@@ -4,6 +4,18 @@ let manager = new PlanetManager();
 let client = null;
 
 let startpoint = null;
+let createMass = 0;
+
+let slider = document.querySelector("#mass");
+let masstxt = document.querySelector("#masstxt");
+
+function sliderUpdate() {
+  masstxt.textContent = slider.value;
+  createMass = parseInt(slider.value);
+}
+
+sliderUpdate();
+slider.addEventListener("change", sliderUpdate);
 
 function addPlanet(pos, vel, mass) {
   client.send(JSON.stringify({
@@ -26,8 +38,8 @@ window.mouseReleased = () => {
 
   let direction = subVec(startpoint, endpoint);
 
-  addPlanet(startpoint, direction, 100)
-  manager.addPlanet({ pos: startpoint, vel: direction, mass: 100 });
+  addPlanet(startpoint, direction, createMass)
+  manager.addPlanet({ pos: startpoint, vel: direction, mass: createMass });
 }
 
 
