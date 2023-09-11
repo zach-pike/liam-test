@@ -1,5 +1,5 @@
 import ws, { WebSocketServer } from 'ws';
-import { PlanetManager, Planet, Vec2, ClientServerMessage, NewPlanetData } from './lib/planet';
+import { PlanetManager, ClientServerMessage, NewPlanetData } from '../lib/planet';
 
 let planets = new PlanetManager();
 
@@ -13,13 +13,7 @@ wss.on('connection', (socket) => {
         
         switch(obj.intent) {
             case "addPlanet": {
-                //@ts-ignore
-                let pos = new Vec2(obj.data.pos.x, obj.data.pos.y);
-                // @ts-ignore
-                let vel = new Vec2(obj.data.vel.x, obj.data.vel.y);
-
-
-                planets.addPlanet(new Planet(pos, vel, obj.data.mass))
+                planets.addPlanet({ pos: obj.data.pos, vel: obj.data.vel, mass: obj.data.mass });
             } break;
         }
     })

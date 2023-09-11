@@ -20,22 +20,22 @@ export interface Planet {
     mass: number
 }
 
-function getVecLength(b: Vec2) { return Math.sqrt(Math.pow(b.x, 2) + Math.pow(b.y, 2)); }
+export function getVecLength(b: Vec2) { return Math.sqrt(Math.pow(b.x, 2) + Math.pow(b.y, 2)); }
 
-function setVecLength(v: Vec2, mag: number) {
+export function setVecLength(v: Vec2, mag: number) {
     let scaleF = mag / getVecLength(v);
     v.x *= scaleF;
     v.y *= scaleF;
 }
 
-function addVec(lhs: Vec2, rhs: Vec2) { return { x: lhs.x + rhs.x, y: lhs.y + rhs.y }; }
-function subVec(lhs: Vec2, rhs: Vec2) { return { x: lhs.x - rhs.x, y: lhs.y - rhs.y }; }
-function mulVec(lhs: Vec2, rhs: Vec2) { return { x: lhs.x * rhs.x, y: lhs.y * rhs.y }; }
-function mulVecScalar(lhs: Vec2, rhs: number) { return { x: lhs.x * rhs, y: lhs.y * rhs }; }
-function divVec(lhs: Vec2, rhs: Vec2) { return { x: lhs.x / rhs.x, y: lhs.y / rhs.y }; }
-function divVecScalar(lhs: Vec2, rhs: number) { return { x: lhs.x / rhs, y: lhs.y / rhs }; }
+export function addVec(lhs: Vec2, rhs: Vec2) { return { x: lhs.x + rhs.x, y: lhs.y + rhs.y }; }
+export function subVec(lhs: Vec2, rhs: Vec2) { return { x: lhs.x - rhs.x, y: lhs.y - rhs.y }; }
+export function mulVec(lhs: Vec2, rhs: Vec2) { return { x: lhs.x * rhs.x, y: lhs.y * rhs.y }; }
+export function mulVecScalar(lhs: Vec2, rhs: number) { return { x: lhs.x * rhs, y: lhs.y * rhs }; }
+export function divVec(lhs: Vec2, rhs: Vec2) { return { x: lhs.x / rhs.x, y: lhs.y / rhs.y }; }
+export function divVecScalar(lhs: Vec2, rhs: number) { return { x: lhs.x / rhs, y: lhs.y / rhs }; }
 
-function updatePlanetPosition(planet: Planet) {
+export function updatePlanetPosition(planet: Planet) {
     planet.pos = addVec(planet.pos, divVecScalar(planet.vel, planet.mass));
 }
 

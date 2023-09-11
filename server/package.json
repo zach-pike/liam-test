@@ -13,6 +13,6 @@
   },
   "scripts": {
     "build": "yarn tsc",
-    "start": "node build/"
+    "start": "node build/src/"
   }
 }

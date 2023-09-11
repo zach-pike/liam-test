@@ -1,4 +1,4 @@
-import { Planet, PlanetManager, Vec2 } from "./planet"
+import { PlanetManager } from "../server/lib/planet"
 
 let manager = new PlanetManager();
 let client = null;
@@ -19,26 +19,16 @@ window.setup = () => {
   background(0);
   frameRate(60);
 
-  client = new WebSocket("ws://localhost:8081");
+  client = new WebSocket(`ws://${window.location.hostname}:8081`);
 
   client.onmessage = (m) => {
-    let data = JSON.parse(m.data);
-    let p = [];
-
-    data.forEach((v) => {
-      let pos = new Vec2(v.pos.x, v.pos.y);
-      let vel = new Vec2(v.vel.x, v.vel.y);
-
-      p.push(new Planet(pos, vel, v.mass))
-    })
-    console.log(p)
-    manager.setPlanetsArray(p);
+    manager.setPlanetsArray(JSON.parse(m.data));
   }
 }
 
 window.onclick = () => {
-  addPlanet(new Vec2(100, 100), new Vec2(0, 0), 500);
-  addPlanet(new Vec2(250, 100), new Vec2(0, -200), 100);
+  addPlanet({x: 100, y: 100 }, { x: 0, y: 0 }, 500);
+  addPlanet({ x: 250, y: 100 }, { x: 0, y: -200 }, 100);
 }
 
 window.draw = () => {
